@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b10">
+  <meta name="description" content="Echo competitor intelligence: live pricing, plan limits, and recent changes for AI meeting notetakers.">
+  <title>Echo competitor intelligence</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312151c'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-size='16' font-family='Georgia' fill='%23b7f0c8'%3EE%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#what-changed">Skip to content</a>
+  <div class="wrap">
+    <header class="site-header">
+      <div class="brand-row">
+        <p class="brand">
+          <span class="mark">Echo</span>
+          <span class="brand-sub"><span class="dot" aria-hidden="true"></span>Live sheets</span>
+        </p>
+        <button type="button" class="reload" id="reload">Reload data</button>
+      </div>
+      <h1>Competitor intelligence</h1>
+      <p class="lede">A market brief on AI meeting notetakers. Prices, limits, and product changes are read from the published sheets when this page loads.</p>
+      <p id="status" class="status" role="status">Loading the latest sheets…</p>
+    </header>
+
+    <nav class="toc" aria-label="On this page">
+      <a href="#what-changed">What changed</a>
+      <a href="#team-cost">5-seat cost</a>
+      <a href="#plans">Plans</a>
+      <a href="#features">Features</a>
+    </nav>
+
+    <main id="main">
+      <section class="section" id="what-changed" aria-labelledby="changed-heading">
+        <header class="section-head">
+          <p class="index">01 — Changes</p>
+          <h2 id="changed-heading">What changed</h2>
+          <p class="section-lead">Changelog rows from the recent-changes sheet, newest first. Rows whose source is “skip” stay in the note under the feed.</p>
+        </header>
+        <div id="feed" class="feed" aria-live="polite">
+          <p class="loading">Loading recent changes…</p>
+        </div>
+        <div id="notes"></div>
+      </section>
+
+      <section class="section" id="team-cost" aria-labelledby="cost-heading">
+        <header class="section-head">
+          <p class="index">02 — Price</p>
+          <h2 id="cost-heading">Five-seat monthly cost</h2>
+          <p class="section-lead">Each bar is that competitor’s cheapest numeric monthly price per seat, multiplied by 5. Free, $0, and non-numeric prices are excluded — Talk to sales, Custom, annual-only, and demo.</p>
+        </header>
+        <div id="chart">
+          <p class="loading">Loading plan prices…</p>
+        </div>
+      </section>
+
+      <section class="section" id="plans" aria-labelledby="plans-heading">
+        <header class="section-head">
+          <p class="index">03 — Plans</p>
+          <h2 id="plans-heading">Plans by competitor</h2>
+          <p class="section-lead">Every published plan, with the monthly and annual price per seat and the free-plan limits from the sheet.</p>
+        </header>
+        <div id="plan-grid" class="plan-grid">
+          <p class="loading">Loading plans…</p>
+        </div>
+      </section>
+
+      <section class="section" id="features" aria-labelledby="features-heading">
+        <header class="section-head">
+          <p class="index">04 — Features</p>
+          <h2 id="features-heading">Feature grid</h2>
+          <p class="section-lead">Top features listed for each plan, split into a row you can scan.</p>
+        </header>
+        <div id="feature-grid">
+          <p class="loading">Loading features…</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Built for Echo. This page does not hardcode prices — reload to pull whatever the sheets say now.</p>
+      <p class="proxy-note">Live source: the published Google Sheets CSVs, fetched in the browser. Those files send <code>Access-Control-Allow-Origin: *</code>. If a host blocks that, proxy the two URLs and update <code>PLANS_URL</code> and <code>CHANGES_URL</code> in <code>app.js</code>.</p>
+      <p class="footer-links">
+        <a id="plans-link" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnayPtWCg_TAtnfMaGDwQKLo_6w9i-8vFoXwqW8SpDioTJEI7YX7J--phyZQrIGYaW9v8n9F6BXhuQ/pub?gid=1760620978&single=true&output=csv" target="_blank" rel="noopener noreferrer">Plans CSV</a>
+        <a id="changes-link" href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQnayPtWCg_TAtnfMaGDwQKLo_6w9i-8vFoXwqW8SpDioTJEI7YX7J--phyZQrIGYaW9v8n9F6BXhuQ/pub?gid=542438143&single=true&output=csv" target="_blank" rel="noopener noreferrer">Recent changes CSV</a>
+      </p>
+    </footer>
+  </div>
+  <noscript>
+    <p class="noscript">This dashboard loads live pricing in the browser. Enable JavaScript to fetch the sheets.</p>
+  </noscript>
+  <script src="app.js" defer></script>
+</body>
+</html>
