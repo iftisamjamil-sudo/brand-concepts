@@ -10,6 +10,8 @@
     complete: "Session complete",
   };
 
+  const SETTLE_MS = 680;
+
   const els = {};
   let phase = "idle";
   let selectedMinutes = 25;
@@ -19,7 +21,11 @@
   let endAt = 0;
   let rafId = 0;
   let timeoutId = 0;
+  let visualRaf = 0;
+  let visual = 0;
+  let pendingCelebrate = false;
   let lastText = "";
+  const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   function formatUnit(value) {
     if (value >= 1) return "1";
@@ -75,9 +81,18 @@
 
   function sceneCaption(stage, critters) {
     const line = STAGE_CAPTION[stage] || STAGE_CAPTION.seed;
-    if (!critters.length) return line;
-    const newest = CRITTER_CAPTION[critters[critters.length - 1]];
-    return newest ? `${line} ${newest}` : line;
+    const newest = critters.length ? CRITTER_CAPTION[critters[critters.length - 1]] : "";
+    const picture = newest ? `${line} ${newest}` : line;
+    if (phase === "complete") return `Session complete. ${picture}`;
+    return picture;
+  }
+
+  function refreshCaption() {
+    if (!els.scene || !els.sceneStatus) return;
+    const stage = els.scene.dataset.stage || "seed";
+    const critters = (els.scene.dataset.critters || "").split(" ").filter(Boolean);
+    const caption = sceneCaption(stage, critters);
+    if (els.sceneStatus.textContent !== caption) els.sceneStatus.textContent = caption;
   }
 
   function placeSun(value) {
@@ -92,7 +107,7 @@
     );
   }
 
-  function syncScene(value) {
+  function syncScene(value, announce) {
     placeSun(value);
     if (!els.scene) return;
     const stage = stageFor(value);
@@ -102,36 +117,89 @@
     if ((els.scene.dataset.critters || "") !== critterKey) {
       els.scene.dataset.critters = critterKey;
     }
-    els.scene.classList.toggle("is-complete", value >= 1);
-    if (!els.sceneStatus) return;
+    const arrived = value >= 0.997 && progress >= 1;
+    if (arrived && pendingCelebrate) playCelebrate();
+    else els.scene.classList.toggle("is-complete", arrived);
+    if (announce === false || !els.sceneStatus) return;
     const caption = sceneCaption(stage, critters);
     if (els.sceneStatus.textContent !== caption) {
       els.sceneStatus.textContent = caption;
     }
   }
 
-  function celebrateScene() {
-    if (!els.scene || progress < 1) return;
+  function playCelebrate() {
+    pendingCelebrate = false;
+    if (!els.scene) return;
     els.scene.classList.remove("is-complete");
     void els.scene.offsetWidth;
     els.scene.classList.add("is-complete");
+    if (phase === "complete" && els.reset) els.reset.focus();
+  }
+
+  function celebrateScene() {
+    if (!els.scene || progress < 1) return;
+    pendingCelebrate = true;
+    if (!visualRaf) playCelebrate();
+  }
+
+  function cancelVisual() {
+    if (visualRaf) cancelAnimationFrame(visualRaf);
+    visualRaf = 0;
+  }
+
+  function paint(value, announce) {
+    visual = value;
+    const cssValue = formatUnit(value);
+    document.documentElement.style.setProperty("--focus-progress", cssValue);
+    if (els.scene) els.scene.style.setProperty("--focus-progress", cssValue);
+    syncScene(value, announce);
+  }
+
+  function animateVisual(target) {
+    cancelVisual();
+    const from = visual;
+    if (Math.abs(from - target) < 0.0015) {
+      paint(target, true);
+      return;
+    }
+    const started = performance.now();
+    const step = (now) => {
+      if (phase === "running") {
+        visualRaf = 0;
+        paint(progress, true);
+        return;
+      }
+      const t = Math.min(1, (now - started) / SETTLE_MS);
+      const eased = 1 - Math.pow(1 - t, 3);
+      if (t < 1) {
+        paint(from + (target - from) * eased, false);
+        visualRaf = requestAnimationFrame(step);
+        return;
+      }
+      visualRaf = 0;
+      paint(target, true);
+    };
+    visualRaf = requestAnimationFrame(step);
   }
 
   function setProgress(p) {
     const value = Number(p);
     const next = Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
     progress = next;
-    const cssValue = formatUnit(next);
-    document.documentElement.style.setProperty("--focus-progress", cssValue);
-    document.documentElement.dataset.focusProgress = cssValue;
-    if (els.scene) {
-      els.scene.style.setProperty("--focus-progress", cssValue);
-      els.scene.dataset.progress = cssValue;
-    }
+    if (next < 1) pendingCelebrate = false;
+    const logical = formatUnit(next);
+    document.documentElement.dataset.focusProgress = logical;
+    if (els.scene) els.scene.dataset.progress = logical;
     if (els.track) {
       els.track.setAttribute("aria-valuenow", String(Math.round(next * 100)));
     }
-    syncScene(next);
+    // A running session paints the true ratio every frame. Idle jumps ease in.
+    if (phase === "running" || reduceMotionQuery.matches) {
+      cancelVisual();
+      paint(next, true);
+      return;
+    }
+    animateVisual(next);
   }
 
   function renderClock() {
@@ -162,6 +230,7 @@
     const copy = PHASE_COPY[phase];
     if (els.status.textContent !== copy) els.status.textContent = copy;
     els.app.dataset.phase = phase;
+    refreshCaption();
   }
 
   function clearTimers() {
@@ -202,6 +271,8 @@
   function start() {
     if (phase === "running" || phase === "complete") return;
     phase = "running";
+    cancelVisual();
+    paint(progress, true);
     endAt = performance.now() + remainingMs;
     clearTimers();
     timeoutId = window.setTimeout(finish, Math.max(0, remainingMs));
@@ -222,6 +293,7 @@
   function reset() {
     clearTimers();
     phase = "idle";
+    pendingCelebrate = false;
     totalMs = selectedMinutes * 60 * 1000;
     remainingMs = totalMs;
     window.FocusGarden.setProgress(0);

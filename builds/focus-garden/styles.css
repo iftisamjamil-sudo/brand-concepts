@@ -30,6 +30,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -65,9 +66,10 @@ button {
   width: min(100%, 32.5rem);
   margin: 0 auto;
   padding:
-    calc(clamp(20px, 4vh, 56px) + env(safe-area-inset-top))
-    20px
-    calc(36px + env(safe-area-inset-bottom));
+    calc(clamp(16px, 4vh, 56px) + env(safe-area-inset-top, 0px))
+    calc(18px + env(safe-area-inset-right, 0px))
+    calc(28px + env(safe-area-inset-bottom, 0px))
+    calc(18px + env(safe-area-inset-left, 0px));
 }
 
 .mast {
@@ -96,6 +98,7 @@ button {
 #scene {
   position: relative;
   aspect-ratio: 16 / 10;
+  max-width: 100%;
   border-radius: 28px;
   overflow: hidden;
   background: #c5d6e6;
@@ -103,6 +106,33 @@ button {
     inset 0 0 0 1px rgba(255, 255, 255, 0.7),
     0 18px 40px rgba(72, 52, 24, 0.08);
   user-select: none;
+  transition: box-shadow 700ms ease;
+}
+
+#scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse 46% 40% at 50% 34%, rgba(255, 248, 224, 0.72), rgba(255, 248, 224, 0) 68%),
+    linear-gradient(to top, rgba(91, 138, 106, 0.16), transparent 34%);
+  transition: opacity 520ms ease;
+}
+
+#scene.is-complete {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.88),
+    0 0 0 5px rgba(91, 138, 106, 0.16),
+    0 18px 40px rgba(72, 52, 24, 0.08);
+}
+
+#scene.is-complete::after {
+  opacity: 0.78;
+  animation: complete-glow 1.7s ease;
 }
 
 .scene-art {
@@ -285,7 +315,9 @@ button {
 }
 
 #scene.is-complete .bloom-cluster {
-  animation: bloom-pulse 1.35s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bloom-pulse 1.45s ease;
 }
 
 #scene.is-complete .critter-butterfly .critter-motion {
@@ -318,8 +350,19 @@ button {
 
 @keyframes bloom-pulse {
   0% { transform: scale(1); }
-  38% { transform: scale(1.07); }
+  36% { transform: scale(1.08); }
   100% { transform: scale(1); }
+}
+
+@keyframes complete-glow {
+  0% { opacity: 0; }
+  42% { opacity: 1; }
+  100% { opacity: 0.78; }
+}
+
+@keyframes status-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
 }
 
 @keyframes bob {
@@ -427,7 +470,9 @@ button {
   font-size: 1rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
   cursor: pointer;
+  touch-action: manipulation;
   transition: background-color 180ms ease, color 180ms ease;
 }
 
@@ -489,6 +534,7 @@ button {
   justify-content: center;
   gap: 8px;
   min-height: 52px;
+  min-width: 44px;
   padding: 0 16px;
   border: 0;
   border-radius: 999px;
@@ -497,6 +543,7 @@ button {
   letter-spacing: 0.01em;
   cursor: pointer;
   user-select: none;
+  touch-action: manipulation;
   transition:
     background-color 180ms ease,
     color 180ms ease,
@@ -543,8 +590,8 @@ button {
 }
 
 .btn-primary:disabled {
-  background: #c5d5c9;
-  color: #f7faf7;
+  background: #e4efe7;
+  color: #3f5346;
   box-shadow: none;
 }
 
@@ -558,9 +605,14 @@ button {
   background: var(--sage-soft);
 }
 
-.app[data-phase="complete"] .btn-ghost {
-  background: var(--sage-soft);
-  box-shadow: inset 0 0 0 1.5px var(--sage);
+.app[data-phase="complete"] #reset {
+  background: var(--sage);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(91, 138, 106, 0.22);
+}
+
+.app[data-phase="complete"] #reset:hover {
+  background: var(--sage-deep);
 }
 
 .phase {
@@ -575,6 +627,7 @@ button {
 .app[data-phase="complete"] .phase {
   color: var(--sage-deep);
   font-weight: 600;
+  animation: status-in 560ms ease;
 }
 
 .visually-hidden {
@@ -589,9 +642,52 @@ button {
   border: 0;
 }
 
+.critter-beetle .critter-motion,
+.critter-snail .critter-motion,
+.critter-butterfly .critter-motion,
+.critter-bird .critter-motion,
+.wing-left,
+.wing-right,
+.bird-wing,
+.firefly,
+.firefly-glow {
+  animation-play-state: paused;
+}
+
+#scene[data-critters~="beetle"] .critter-beetle .critter-motion,
+#scene[data-critters~="snail"] .critter-snail .critter-motion,
+#scene[data-critters~="butterfly"] .critter-butterfly .critter-motion,
+#scene[data-critters~="butterfly"] .wing-left,
+#scene[data-critters~="butterfly"] .wing-right,
+#scene[data-critters~="bird"] .critter-bird .critter-motion,
+#scene[data-critters~="bird"] .bird-wing,
+#scene[data-critters~="firefly"] .firefly,
+#scene[data-critters~="firefly"] .firefly-glow {
+  animation-play-state: running;
+}
+
 @media (min-width: 720px) {
   .panel {
     padding: 32px 28px 22px;
+  }
+}
+
+@media (max-width: 430px) {
+  .mast {
+    margin-bottom: 14px;
+  }
+
+  .panel {
+    margin-top: 12px;
+    padding: 22px 16px 16px;
+  }
+
+  .time {
+    font-size: clamp(4.25rem, 18vw, 5.5rem);
+  }
+
+  .controls {
+    gap: 8px;
   }
 }
 
