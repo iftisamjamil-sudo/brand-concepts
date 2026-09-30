@@ -8,5 +8,5 @@ Session progress is a number from 0 to 1. The timer writes it to `--focus-progre
 
 - [x] Scaffold + timer shell (this PR)
 - [x] Growing mini scene: sky, ground, plant stages, critters, sky shift over session
-- [ ] Polish: smooth CSS animations, mobile layout, session-complete moment
-- [ ] Live QA on brand-concepts-seven.vercel.app/builds/focus-garden/
+- [x] Polish: smooth CSS animations, mobile layout, session-complete moment
+- [ ] Live QA on brand-concepts-seven.vercel.app/builds/focus-garden/ (pending)
