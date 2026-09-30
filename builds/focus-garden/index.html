@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3ebdf">
+    <title>Focus Garden</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 28V13' stroke='%235B8A6A' stroke-width='2' stroke-linecap='round' fill='none'/%3E%3Cpath d='M16 19c-4-.6-7.5-3.2-7.5-7.2 4.2.2 6.6 2.4 7.5 5.6' fill='%238FB39A'/%3E%3Cpath d='M16 16.5c4-.7 8-3 8-7.2-4.4.3-6.8 2.6-8 5.8' fill='%235B8A6A'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app" id="app" data-phase="idle">
+      <header class="mast">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 28V13" fill="none" stroke="#5B8A6A" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M16 19c-4-.6-7.5-3.2-7.5-7.2 4.2.2 6.6 2.4 7.5 5.6" fill="#8FB39A"></path>
+          <path d="M16 16.5c4-.7 8-3 8-7.2-4.4.3-6.8 2.6-8 5.8" fill="#5B8A6A"></path>
+        </svg>
+        <h1>Focus Garden</h1>
+      </header>
+
+      <section id="scene" aria-label="Garden scene">
+        <svg class="ground" viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="#c5d9cb" d="M0 78c70-36 130-8 210-28 80-20 120 24 200 8 50-10 120-6 190-24v126H0V78z"></path>
+          <path fill="#8FB39A" d="M0 102c80-24 140 10 220-8 90-20 130 16 210 2 60-10 110 4 170-12v76H0v-58z"></path>
+          <path fill="#5B8A6A" d="M0 124c90-18 150 14 240-2 80-14 130 12 210 0 50-8 90 6 150-8v46H0v-36z"></path>
+        </svg>
+      </section>
+
+      <section class="panel" aria-labelledby="timer-heading">
+        <h2 id="timer-heading" class="visually-hidden">Focus timer</h2>
+        <time id="time" class="time" role="timer" aria-label="Time remaining" datetime="PT25M">25:00</time>
+        <div
+          id="track"
+          class="track"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Session progress"
+        >
+          <span class="track-fill"></span>
+        </div>
+
+        <div class="durations" id="durations" role="radiogroup" aria-label="Session length">
+          <label class="duration">
+            <input type="radio" name="minutes" value="15">
+            <span>15 min</span>
+          </label>
+          <label class="duration">
+            <input type="radio" name="minutes" value="25" checked>
+            <span>25 min</span>
+          </label>
+          <label class="duration">
+            <input type="radio" name="minutes" value="50">
+            <span>50 min</span>
+          </label>
+        </div>
+
+        <div class="controls">
+          <button type="button" id="toggle" class="btn btn-primary" aria-pressed="false">
+            <svg class="icon" id="icon-play" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M8.2 5.35c-.72-.43-1.64.09-1.64.92v11.46c0 .83.92 1.35 1.64.92l9.35-5.73c.7-.43.7-1.41 0-1.84L8.2 5.35z"></path>
+            </svg>
+            <svg class="icon" id="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden>
+              <rect x="6" y="5" width="4.2" height="14" rx="1.3" fill="currentColor"></rect>
+              <rect x="13.8" y="5" width="4.2" height="14" rx="1.3" fill="currentColor"></rect>
+            </svg>
+            <span id="toggle-label">Start</span>
+          </button>
+          <button type="button" id="reset" class="btn btn-ghost">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19.4 12a7.4 7.4 0 1 1-2.05-5.15"></path>
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M19.4 4.6V8h-3.4"></path>
+            </svg>
+            <span>Reset</span>
+          </button>
+        </div>
+        <p id="status" class="phase" aria-live="polite">Ready</p>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
