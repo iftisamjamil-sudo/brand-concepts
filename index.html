@@ -1,48 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#1c1916" />
-    <title>Brand Concepts</title>
-    <meta name="description" content="Brand Concepts — a library of video digests." />
-    <link rel="icon" href="/learn/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@400;500;600&display=swap"
-      rel="stylesheet"
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Fieldnote Studio — homepage concepts</title>
+    <meta
+      name="description"
+      content="Editorial index of Fieldnote Studio homepage concepts. Not live brand sites."
     />
-    <link rel="stylesheet" href="/learn/styles.css" />
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f6f1e8;
+        --ink: #221e1a;
+        --soft: #5e564c;
+        --line: #d8d0c2;
+        --serif: "Iowan Old Style", Palatino, Georgia, serif;
+        --sans: "Avenir Next", "Segoe UI", sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 1.05rem;
+        line-height: 1.55;
+      }
+      main {
+        width: min(42rem, calc(100% - 2.5rem));
+        margin: 0 auto;
+        padding: 4rem 0 5rem;
+      }
+      p.eyebrow {
+        margin: 0 0 0.75rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--soft);
+      }
+      h1 {
+        margin: 0 0 1rem;
+        font-family: var(--serif);
+        font-weight: 500;
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+      }
+      .lede {
+        margin: 0 0 2.5rem;
+        color: var(--soft);
+        max-width: 34rem;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid var(--line);
+      }
+      li {
+        border-bottom: 1px solid var(--line);
+      }
+      a {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.15rem 0;
+        color: inherit;
+        text-decoration: none;
+      }
+      a:hover span:first-child {
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+      }
+      .path {
+        color: var(--soft);
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
+      .note {
+        margin-top: 2.5rem;
+        color: var(--soft);
+        font-size: 0.92rem;
+      }
+    </style>
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="/">
-        <span class="mark" aria-hidden="true">
-          <svg viewBox="0 0 14 14" fill="currentColor"><path d="M4 2.2v9.6l8-4.8-8-4.8z" /></svg>
-        </span>
-        Brand Concepts
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="/learn/">Learn</a>
-      </nav>
-    </header>
-
-    <main class="wrap">
-      <section class="hero">
-        <p class="eyebrow">Brand Concepts</p>
-        <h1>A quieter way to keep the videos that matter.</h1>
-        <p class="lede">
-          The learning library turns a published sheet into summaries, timestamped steps, one action, and a short quiz.
-        </p>
-        <div class="home-actions">
-          <a class="button" href="/learn/">Open the library</a>
-        </div>
-      </section>
+    <main>
+      <p class="eyebrow">Fieldnote Studio</p>
+      <h1>Homepage concepts</h1>
+      <p class="lede">
+        Three editorial homepage concepts prepared for Client Finder. Each page is
+        marked noindex and is not the live brand site.
+      </p>
+      <ul>
+        <li>
+          <a href="/sagebrush/">
+            <span>Sagebrush Dry Gear</span>
+            <span class="path">/sagebrush/</span>
+          </a>
+        </li>
+        <li>
+          <a href="/field-and-forge/">
+            <span>Field &amp; Forge</span>
+            <span class="path">/field-and-forge/</span>
+          </a>
+        </li>
+        <li>
+          <a href="/wick-of-hope/">
+            <span>Wick of Hope</span>
+            <span class="path">/wick-of-hope/</span>
+          </a>
+        </li>
+      </ul>
+      <p class="note">
+        Concepts by Fieldnote Studio. Hosted for review on brand-concepts-seven.vercel.app.
+      </p>
     </main>
-
-    <footer class="site-footer">
-      <a href="https://brand-concepts-seven.vercel.app/learn/">https://brand-concepts-seven.vercel.app/learn/</a>
-    </footer>
   </body>
 </html>
