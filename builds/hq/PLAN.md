@@ -11,4 +11,4 @@ Each card shows, in order: title, status, the given numbers, what’s waiting on
 - [x] Market Watch card: status, numbers, clear waiting state, Echo dashboard, Sheet
 - [x] Watch Later card: status, numbers, clear waiting state, Learn site
 - [x] Mobile-first layout, reduced motion, focus styles, external links open in a new tab
-- [ ] Checked in a browser at about 390px and 1280px (no overflow, copy and URLs correct)
+- [x] Checked in a browser at about 390px and 1280px (no overflow, copy and URLs correct)

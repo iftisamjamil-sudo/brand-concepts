@@ -300,7 +300,6 @@ body {
 .links {
   display: grid;
   gap: 8px;
-  margin-top: auto;
 }
 
 .links a {
@@ -375,7 +374,7 @@ body {
   .board {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
-    align-items: stretch;
+    align-items: start;
   }
 }
 
