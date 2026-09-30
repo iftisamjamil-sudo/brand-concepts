@@ -514,7 +514,7 @@ function renderCards(groups) {
     return;
   }
   mount.replaceChildren(
-    groups.map((group) => {
+    ...groups.map((group) => {
       const dates = [...new Set(group.plans.map((plan) => plan.Date).filter(Boolean))];
       const sources = [];
       const seen = new Set();

@@ -478,6 +478,7 @@ button.reload:disabled {
 .plan-grid {
   display: grid;
   gap: 14px;
+  align-items: start;
 }
 
 .plan-card {
@@ -559,7 +560,7 @@ button.reload:disabled {
   padding: 0;
 }
 
-.plan-head {
+.plan-list li.plan-head {
   display: none;
   margin: 0;
   color: var(--faint);
@@ -583,6 +584,10 @@ button.reload:disabled {
 
 .pv {
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
   color: var(--muted);
   font-size: 0.95rem;
 }
@@ -591,6 +596,7 @@ button.reload:disabled {
   font-family: var(--mono);
   font-weight: 500;
   color: var(--text);
+  text-align: right;
 }
 
 .notes {
@@ -731,12 +737,16 @@ button.reload:disabled {
     grid-template-columns: 1fr 1fr;
   }
 
-  .plan-head {
+  .plan-list li.plan-head {
     display: grid;
     grid-template-columns: 1.1fr 1fr 1fr;
     gap: 12px;
     padding: 0 0 4px;
     border-top: 0;
+  }
+
+  .pv {
+    display: block;
   }
 
   .plan-list li {
@@ -776,8 +786,8 @@ button.reload:disabled {
     z-index: 2;
     margin: 0;
     padding: 10px 0;
-    background: color-mix(in srgb, var(--bg) 92%, transparent);
-    backdrop-filter: blur(12px);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
   }
 
   .grid-head span {
