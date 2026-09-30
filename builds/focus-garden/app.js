@@ -68,8 +68,9 @@
     els.toggleLabel.textContent = running ? "Pause" : "Start";
     els.toggle.setAttribute("aria-pressed", running ? "true" : "false");
     els.toggle.disabled = phase === "complete";
-    els.iconPlay.hidden = running;
-    els.iconPause.hidden = !running;
+    // SVG elements do not reflect the HTMLElement.hidden IDL property.
+    els.iconPlay.toggleAttribute("hidden", running);
+    els.iconPause.toggleAttribute("hidden", !running);
 
     const locked = phase !== "idle";
     els.durationInputs.forEach((input) => {
