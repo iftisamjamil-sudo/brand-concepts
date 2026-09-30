@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3ebdf">
+    <meta name="description" content="HQ dashboard for Iftisam’s bot team: Client Finder, Market Watch, and Watch Later.">
+    <title>HQ · Bot team</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='5' width='26' height='22' rx='6' fill='%23fffbf6' stroke='%235B8A6A' stroke-width='1.6'/%3E%3Cpath d='M10 22V13' stroke='%235B8A6A' stroke-width='1.6' stroke-linecap='round'/%3E%3Cpath d='M10 17c-3-.3-5-1.8-5-3.8 2.6.2 4 1.4 5 3.1' fill='%238FB39A'/%3E%3Cpath d='M10 15.5c3-.4 5.2-1.8 5.2-4-2.8.2-4.3 1.5-5.2 3.4' fill='%235B8A6A'/%3E%3Crect x='17' y='12' width='8' height='2' rx='1' fill='%23243027'/%3E%3Crect x='17' y='16.5' width='6' height='2' rx='1' fill='%235c6756'/%3E%3Crect x='17' y='21' width='7' height='2' rx='1' fill='%235B8A6A'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="mast">
+        <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="4" y="6" width="40" height="36" rx="12" fill="#fffbf6" stroke="#5B8A6A" stroke-width="1.6"></rect>
+          <path d="M16 32V18" fill="none" stroke="#5B8A6A" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M16 24c-5-.5-8-2.6-8-5.6 4.2.3 6.4 2 7.6 4.4" fill="#8FB39A"></path>
+          <path d="M16 22c5-.6 8.4-2.6 8.4-6-4.4.3-6.6 2.2-8 4.8" fill="#5B8A6A"></path>
+          <rect x="26" y="16" width="12" height="2.4" rx="1.2" fill="#243027"></rect>
+          <rect x="26" y="21.5" width="9" height="2.4" rx="1.2" fill="#5c6756" opacity="0.7"></rect>
+          <rect x="26" y="27" width="10.5" height="2.4" rx="1.2" fill="#5B8A6A"></rect>
+        </svg>
+        <div>
+          <p class="kicker">Iftisam’s bot team</p>
+          <h1>HQ</h1>
+        </div>
+      </header>
+      <p class="lede">Status, numbers, and what’s waiting — one card per bot.</p>
+
+      <section class="board" aria-label="Bots">
+        <article class="card is-waiting">
+          <div class="card-rise">
+            <header class="card-top">
+              <span class="bot-icon">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <rect x="4" y="5" width="15" height="20" rx="3" fill="#fffbf6" stroke="#5B8A6A" stroke-width="1.5"></rect>
+                  <path d="M8 11h7M8 15h5.5" fill="none" stroke="#3f6b50" stroke-width="1.5" stroke-linecap="round"></path>
+                  <circle cx="20.5" cy="19.5" r="5" fill="#e4f0e7" stroke="#243027" stroke-width="1.6"></circle>
+                  <path d="M24.2 23.2L28 27" fill="none" stroke="#243027" stroke-width="1.6" stroke-linecap="round"></path>
+                </svg>
+              </span>
+              <div>
+                <h2>Client Finder</h2>
+                <p class="status"><span class="pill">Batch 1 done; idle pending review</span></p>
+              </div>
+            </header>
+
+            <h3 class="section-label">Numbers</h3>
+            <ul class="stats">
+              <li>3 brands researched</li>
+              <li>3 concepts live</li>
+              <li>3 sheet rows</li>
+              <li>3 Gmail drafts (not sent)</li>
+            </ul>
+
+            <div class="wait is-waiting">
+              <h3>Waiting on Iftisam</h3>
+              <p>
+                <svg class="wait-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+                  <path d="M12 8v4.5l3 1.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>concept/draft review (or send/edit asks)</span>
+              </p>
+            </div>
+
+            <h3 class="section-label">Links</h3>
+            <ul class="links">
+              <li>
+                <a href="https://brand-concepts-seven.vercel.app/field-and-forge/" target="_blank" rel="noopener noreferrer">
+                  Field and Forge
+                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.5 6.5L6.5 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="https://brand-concepts-seven.vercel.app/sagebrush/" target="_blank" rel="noopener noreferrer">
+                  Sagebrush
+                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.5 6.5L6.5 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="https://brand-concepts-seven.vercel.app/wick-of-hope/" target="_blank" rel="noopener noreferrer">
+                  Wick of Hope
+                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.5 6.5L6.5 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="https://docs.google.com/spreadsheets/d/1eTaCWmIyLwJk4uwa9gAdU_pM7I_P8R8hou6MvW97rIU/edit" target="_blank" rel="noopener noreferrer">
+                  Leads sheet
+                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.5 6.5L6.5 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card is-clear">
+          <div class="card-rise">
+            <header class="card-top">
+              <span class="bot-icon">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <rect x="5" y="18" width="4.5" height="8" rx="1.2" fill="#8FB39A"></rect>
+                  <rect x="13" y="13" width="4.5" height="13" rx="1.2" fill="#5B8A6A"></rect>
+                  <rect x="21" y="8" width="4.5" height="18" rx="1.2" fill="#3f6b50"></rect>
+                  <path d="M6 16.5l6.5-4.5 4.5 2.8 8-6.3" fill="none" stroke="#243027" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+              <div>
+                <h2>Market Watch</h2>
+                <p class="status"><span class="pill">Echo competitor tracking current</span></p>
+              </div>
+            </header>
+
+            <h3 class="section-label">Numbers</h3>
+            <ul class="stats">
+              <li>7 competitors tracked</li>
+              <li>27 plans in sheet</li>
+              <li>last check 2026-09-30</li>
+              <li>cheapest paid monthly seat Granola Business $14</li>
+              <li>X/Twitter blocked (403)</li>
+            </ul>
+
+            <div class="wait is-clear">
+              <h3>Waiting on Iftisam</h3>
+              <p>
+                <svg class="wait-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+                  <path d="M8.5 12.2l2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>nothing</span>
+              </p>
+            </div>
+
+            <h3 class="section-label">Links</h3>
+            <ul class="links">
+              <li>
+                <a href="https://brand-concepts-seven.vercel.app/echo/" target="_blank" rel="noopener noreferrer">
+                  Echo dashboard
+                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.5 6.5L6.5 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a href="https://docs.google.com/spreadsheets/d/1DrOglb5yvJotOBeweEL4ZXpUABfUcXXPz1sJjQYcaNY/edit" target="_blank" rel="noopener noreferrer">
+                  Sheet
+                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.5 6.5L6.5 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card is-clear">
+          <div class="card-rise">
+            <header class="card-top">
+              <span class="bot-icon">
+                <svg viewBox="0 0 32 32" aria-hidden="true">
+                  <path d="M9 5.5h13.2a2 2 0 0 1 2 2V27l-8.6-4.2L7 27V7.5a2 2 0 0 1 2-2z" fill="#e4f0e7" stroke="#5B8A6A" stroke-width="1.5" stroke-linejoin="round"></path>
+                  <path d="M13.2 12.2v7.2l6.2-3.6-6.2-3.6z" fill="#3f6b50"></path>
+                </svg>
+              </span>
+              <div>
+                <h2>Watch Later</h2>
+                <p class="status"><span class="pill">Digests live; caption retries in flight for 2 videos</span></p>
+              </div>
+            </header>
+
+            <h3 class="section-label">Numbers</h3>
+            <ul class="stats">
+              <li>7 digests live</li>
+              <li>Batch 1: 4 done (3 worth watching, 1 skim)</li>
+              <li>Batch 2: 3 of next 5 done (2 worth watching, 1 skim)</li>
+              <li>~6 still on Watch Later</li>
+              <li>2 blocked on YouTube caption 429 (Mobbin, Nick Saraev)</li>
+            </ul>
+
+            <div class="wait is-clear">
+              <h3>Waiting on Iftisam</h3>
+              <p>
+                <svg class="wait-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+                  <path d="M8.5 12.2l2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span>nothing</span>
+              </p>
+            </div>
+
+            <h3 class="section-label">Links</h3>
+            <ul class="links">
+              <li>
+                <a href="https://brand-concepts-seven.vercel.app/learn/" target="_blank" rel="noopener noreferrer">
+                  Learn site
+                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <svg class="ext" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 6h10v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M17.5 6.5L6.5 17.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
