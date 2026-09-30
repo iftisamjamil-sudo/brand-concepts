@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1c1916" />
+    <title>Learn · Brand Concepts</title>
+    <meta
+      name="description"
+      content="Video digests loaded live from a published sheet: summaries, timestamped steps, one action, and a flip-card quiz."
+    />
+    <link rel="icon" href="/learn/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/learn/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 14 14" fill="currentColor"><path d="M4 2.2v9.6l8-4.8-8-4.8z" /></svg>
+        </span>
+        Brand Concepts
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/learn/" aria-current="page">Learn</a>
+      </nav>
+    </header>
+
+    <main class="wrap" id="main">
+      <section class="hero">
+        <p class="eyebrow">Learn</p>
+        <h1>Video digests, ready when you are.</h1>
+        <p class="lede">
+          A five-bullet summary, timestamped steps, one action, and a flip-card quiz — read live from the published sheet.
+        </p>
+      </section>
+
+      <div class="toolbar">
+        <label class="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.5-3.5"></path>
+          </svg>
+          <span class="sr-only">Search digests</span>
+          <input id="search" type="search" placeholder="Search title, channel, or verdict" autocomplete="off" />
+        </label>
+        <label class="switch">
+          <input id="worth" type="checkbox" />
+          Worth watching
+        </label>
+        <p class="count" id="count" aria-live="polite">Loading…</p>
+      </div>
+
+      <div id="library" class="library"></div>
+    </main>
+
+    <footer class="site-footer">
+      <a href="https://brand-concepts-seven.vercel.app/learn/">brand-concepts-seven.vercel.app/learn/</a>
+    </footer>
+
+    <noscript>
+      <p class="wrap">This library needs JavaScript to read the published sheet.</p>
+    </noscript>
+    <script type="module" src="/learn/index.js"></script>
+  </body>
+</html>
