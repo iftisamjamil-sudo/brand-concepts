@@ -19,11 +19,316 @@
         <h1>Focus Garden</h1>
       </header>
 
-      <section id="scene" aria-label="Garden scene">
-        <svg class="ground" viewBox="0 0 600 160" preserveAspectRatio="none" aria-hidden="true">
-          <path fill="#c5d9cb" d="M0 78c70-36 130-8 210-28 80-20 120 24 200 8 50-10 120-6 190-24v126H0V78z"></path>
-          <path fill="#8FB39A" d="M0 102c80-24 140 10 220-8 90-20 130 16 210 2 60-10 110 4 170-12v76H0v-58z"></path>
-          <path fill="#5B8A6A" d="M0 124c90-18 150 14 240-2 80-14 130 12 210 0 50-8 90 6 150-8v46H0v-36z"></path>
+      <section id="scene" aria-label="Garden scene" data-stage="seed" data-critters="">
+        <p id="scene-status" class="visually-hidden" aria-live="polite">A seed rests in the soil.</p>
+        <svg class="scene-art" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="fg-sky-morning" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#A8BDD6"></stop>
+              <stop offset="46%" stop-color="#D5E4EE"></stop>
+              <stop offset="100%" stop-color="#E7F2EA"></stop>
+            </linearGradient>
+            <linearGradient id="fg-sky-midday" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6EB4E2"></stop>
+              <stop offset="42%" stop-color="#C9EEE6"></stop>
+              <stop offset="100%" stop-color="#F4F7EE"></stop>
+            </linearGradient>
+            <linearGradient id="fg-sky-evening" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#EF9358"></stop>
+              <stop offset="34%" stop-color="#F6C592"></stop>
+              <stop offset="68%" stop-color="#F7E6CF"></stop>
+              <stop offset="100%" stop-color="#E4EFE4"></stop>
+            </linearGradient>
+            <radialGradient id="fg-sun-halo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFF6D8" stop-opacity="0.95"></stop>
+              <stop offset="42%" stop-color="#FFE7B0" stop-opacity="0.42"></stop>
+              <stop offset="100%" stop-color="#FFE7B0" stop-opacity="0"></stop>
+            </radialGradient>
+            <radialGradient id="fg-sun-warm" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFB15A" stop-opacity="0.9"></stop>
+              <stop offset="48%" stop-color="#FF9442" stop-opacity="0.38"></stop>
+              <stop offset="100%" stop-color="#FF9442" stop-opacity="0"></stop>
+            </radialGradient>
+            <linearGradient id="fg-mist" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F4F8F6" stop-opacity="0"></stop>
+              <stop offset="48%" stop-color="#F7FBF8" stop-opacity="0.8"></stop>
+              <stop offset="100%" stop-color="#F7FBF8" stop-opacity="0"></stop>
+            </linearGradient>
+          </defs>
+
+          <g class="sky sky-morning">
+            <rect width="640" height="400" fill="url(#fg-sky-morning)"></rect>
+          </g>
+          <g class="sky sky-midday">
+            <rect width="640" height="400" fill="url(#fg-sky-midday)"></rect>
+          </g>
+          <g class="sky sky-evening">
+            <rect width="640" height="400" fill="url(#fg-sky-evening)"></rect>
+          </g>
+
+          <g class="sun" transform="translate(108 172) scale(1.12)">
+            <circle class="sun-halo" r="58" fill="url(#fg-sun-halo)"></circle>
+            <circle class="sun-warm" r="58" fill="url(#fg-sun-warm)"></circle>
+            <circle class="sun-core" r="15" fill="#FFFAF2"></circle>
+          </g>
+
+          <g transform="translate(132 84)">
+            <g class="cloud cloud-a">
+              <ellipse cx="0" cy="10" rx="40" ry="16" fill="#FFFEFB"></ellipse>
+              <ellipse cx="-26" cy="14" rx="24" ry="14" fill="#FFFEFB"></ellipse>
+              <ellipse cx="28" cy="14" rx="28" ry="15" fill="#FFFEFB"></ellipse>
+            </g>
+          </g>
+          <g transform="translate(454 62)">
+            <g class="cloud cloud-b">
+              <ellipse cx="0" cy="8" rx="30" ry="13" fill="#FFFEFB"></ellipse>
+              <ellipse cx="22" cy="12" rx="20" ry="11" fill="#FFFEFB"></ellipse>
+              <ellipse cx="-18" cy="12" rx="16" ry="10" fill="#FFFEFB"></ellipse>
+            </g>
+          </g>
+
+          <rect class="mist" x="0" y="150" width="640" height="110" fill="url(#fg-mist)"></rect>
+
+          <g transform="translate(548 78)">
+            <g class="critter critter-bird">
+              <g class="critter-motion">
+                <path d="M12 0C22 -2 32 -10 34 -4C28 0 20 2 12 2Z" fill="#243027"></path>
+                <path d="M12 3C22 6 32 12 34 5C26 8 18 6 12 3Z" fill="#3F6B50"></path>
+                <ellipse cx="0" cy="2" rx="16" ry="9" fill="#243027"></ellipse>
+                <ellipse cx="-1" cy="5" rx="9" ry="5" fill="#F3EBDF"></ellipse>
+                <g class="bird-wing">
+                  <path d="M-1 0C8 1 12 10 3 12C-5 10 -9 4 -1 0Z" fill="#5B8A6A"></path>
+                </g>
+                <circle cx="-13" cy="-3" r="7.5" fill="#243027"></circle>
+                <path d="M-19 -3L-29 -1L-19 2.5Z" fill="#E7B15A"></path>
+                <circle cx="-15" cy="-4.4" r="1.7" fill="#FFFAF4"></circle>
+                <circle cx="-15.45" cy="-4.4" r="0.8" fill="#243027"></circle>
+              </g>
+            </g>
+          </g>
+
+          <path fill="#D5E6DC" d="M0 214C90 176 160 206 250 182C340 158 410 196 500 170C560 154 610 176 640 162V400H0V214Z"></path>
+          <g fill="#8FB39A">
+            <ellipse cx="112" cy="196" rx="28" ry="16"></ellipse>
+            <ellipse cx="90" cy="204" rx="16" ry="11"></ellipse>
+            <ellipse cx="136" cy="206" rx="15" ry="10"></ellipse>
+            <ellipse cx="498" cy="178" rx="26" ry="14"></ellipse>
+            <ellipse cx="474" cy="186" rx="16" ry="11"></ellipse>
+            <ellipse cx="522" cy="188" rx="14" ry="10"></ellipse>
+          </g>
+          <path fill="#A9CBB8" d="M0 268C80 230 160 258 250 236C350 210 420 250 510 228C570 214 610 236 640 224V400H0V268Z"></path>
+          <path fill="#5B8A6A" d="M0 312C100 278 180 308 280 286C390 262 460 300 560 278C600 268 630 286 640 280V400H0V312Z"></path>
+          <path fill="#3F6B50" d="M0 356C140 332 220 368 320 348C430 326 520 362 640 340V400H0V356Z"></path>
+          <rect class="ground-warm" x="0" y="250" width="640" height="150" fill="#F0A56A"></rect>
+
+          <g class="tufts" fill="none" stroke-linecap="round">
+            <path d="M76 352C78 334 86 332 88 352" stroke="#2F5A40" stroke-width="2"></path>
+            <path d="M90 354C94 338 104 336 106 354" stroke="#2F5A40" stroke-width="2"></path>
+            <path d="M146 360C148 346 156 344 158 360" stroke="#346348" stroke-width="2"></path>
+            <path d="M544 346C546 330 556 328 558 346" stroke="#2F5A40" stroke-width="2"></path>
+            <path d="M562 350C566 336 576 334 578 350" stroke="#2F5A40" stroke-width="2"></path>
+            <path d="M454 358C456 346 464 344 466 358" stroke="#2C5840" stroke-width="1.8"></path>
+          </g>
+          <g fill="#D7CBB8">
+            <ellipse cx="96" cy="372" rx="5" ry="3"></ellipse>
+            <ellipse cx="428" cy="370" rx="4.2" ry="2.6"></ellipse>
+            <ellipse cx="246" cy="376" rx="3.4" ry="2.1"></ellipse>
+          </g>
+
+          <ellipse cx="312" cy="374" rx="74" ry="11" fill="#243027" opacity="0.08"></ellipse>
+          <ellipse cx="312" cy="366" rx="50" ry="14" fill="#2F5A40"></ellipse>
+          <ellipse cx="312" cy="362" rx="36" ry="9" fill="#5B8A6A"></ellipse>
+          <ellipse cx="298" cy="359" rx="12" ry="3.2" fill="#EDF6F0" opacity="0.3"></ellipse>
+
+          <g class="plant plant-seed">
+            <g transform="rotate(-16 312 346)">
+              <ellipse cx="312" cy="342" rx="16" ry="10" fill="#6A4630"></ellipse>
+              <ellipse cx="306" cy="339" rx="6.2" ry="3" fill="#E4C48A"></ellipse>
+              <path d="M312 334C314 340 313 348 312 352" fill="none" stroke="#4A3018" stroke-width="1.1" stroke-linecap="round" opacity="0.4"></path>
+            </g>
+            <ellipse cx="312" cy="354" rx="24" ry="8" fill="#5B8A6A"></ellipse>
+          </g>
+
+          <g class="plant plant-sprout">
+            <g class="plant-sway">
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <ellipse cx="284" cy="312" rx="22" ry="8" fill="#3F6B50" transform="rotate(48 284 312)"></ellipse>
+              <ellipse cx="338" cy="308" rx="24" ry="8.5" fill="#2F5A40" transform="rotate(-42 338 308)"></ellipse>
+            </g>
+          </g>
+
+          <g class="plant plant-leaves">
+            <g class="plant-sway">
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M308 318C306 298 311 272 309 250" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <path d="M308 318C306 298 311 272 309 250" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <ellipse cx="284" cy="312" rx="22" ry="8" fill="#3F6B50" transform="rotate(48 284 312)"></ellipse>
+              <ellipse cx="338" cy="308" rx="24" ry="8.5" fill="#2F5A40" transform="rotate(-42 338 308)"></ellipse>
+              <ellipse cx="258" cy="274" rx="30" ry="10" fill="#5B8A6A" transform="rotate(38 258 274)"></ellipse>
+              <ellipse cx="362" cy="260" rx="32" ry="10" fill="#3F6B50" transform="rotate(-36 362 260)"></ellipse>
+            </g>
+          </g>
+
+          <g class="plant plant-tall">
+            <g class="plant-sway">
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M308 318C306 298 311 272 309 250" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M309 250C307 226 314 198 305 174" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <path d="M308 318C306 298 311 272 309 250" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <path d="M309 250C307 226 314 198 305 174" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <ellipse cx="284" cy="312" rx="22" ry="8" fill="#3F6B50" transform="rotate(48 284 312)"></ellipse>
+              <ellipse cx="338" cy="308" rx="24" ry="8.5" fill="#2F5A40" transform="rotate(-42 338 308)"></ellipse>
+              <ellipse cx="258" cy="274" rx="30" ry="10" fill="#5B8A6A" transform="rotate(38 258 274)"></ellipse>
+              <ellipse cx="362" cy="260" rx="32" ry="10" fill="#3F6B50" transform="rotate(-36 362 260)"></ellipse>
+              <ellipse cx="256" cy="212" rx="28" ry="9" fill="#8FB39A" transform="rotate(44 256 212)"></ellipse>
+              <ellipse cx="358" cy="190" rx="30" ry="9.5" fill="#5B8A6A" transform="rotate(-40 358 190)"></ellipse>
+              <g class="bud" transform="translate(305 156)">
+                <path d="M0 12C-8 6-7-10 0-18C7-10 8 6 0 12Z" fill="#8FB39A"></path>
+                <path d="M0 12C-5 4-4-1 0-4C4-1 5 4 0 12Z" fill="#3F6B50"></path>
+              </g>
+              <g class="bud" transform="translate(346 188) scale(0.78)">
+                <path d="M0 12C-8 6-7-10 0-18C7-10 8 6 0 12Z" fill="#8FB39A"></path>
+                <path d="M0 12C-5 4-4-1 0-4C4-1 5 4 0 12Z" fill="#3F6B50"></path>
+              </g>
+              <g class="bud" transform="translate(258 208) scale(0.62)">
+                <path d="M0 12C-8 6-7-10 0-18C7-10 8 6 0 12Z" fill="#8FB39A"></path>
+                <path d="M0 12C-5 4-4-1 0-4C4-1 5 4 0 12Z" fill="#3F6B50"></path>
+              </g>
+            </g>
+          </g>
+
+          <g class="plant plant-bloom">
+            <g class="plant-sway">
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M308 318C306 298 311 272 309 250" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M309 250C307 226 314 198 305 174" fill="none" stroke="#3F6B50" stroke-width="5.5" stroke-linecap="round"></path>
+              <path d="M312 364C311 348 309 334 308 318" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <path d="M308 318C306 298 311 272 309 250" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <path d="M309 250C307 226 314 198 305 174" fill="none" stroke="#9DC7AD" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+              <ellipse cx="284" cy="312" rx="22" ry="8" fill="#3F6B50" transform="rotate(48 284 312)"></ellipse>
+              <ellipse cx="338" cy="308" rx="24" ry="8.5" fill="#2F5A40" transform="rotate(-42 338 308)"></ellipse>
+              <ellipse cx="258" cy="274" rx="30" ry="10" fill="#5B8A6A" transform="rotate(38 258 274)"></ellipse>
+              <ellipse cx="362" cy="260" rx="32" ry="10" fill="#3F6B50" transform="rotate(-36 362 260)"></ellipse>
+              <ellipse cx="256" cy="212" rx="28" ry="9" fill="#8FB39A" transform="rotate(44 256 212)"></ellipse>
+              <ellipse cx="358" cy="190" rx="30" ry="9.5" fill="#5B8A6A" transform="rotate(-40 358 190)"></ellipse>
+              <circle cx="248" cy="272" r="2.1" fill="#F7FBF8" opacity="0.85"></circle>
+              <circle cx="376" cy="240" r="1.7" fill="#F7FBF8" opacity="0.8"></circle>
+              <g class="bloom-cluster">
+                <g class="flower" transform="translate(305 150)">
+                  <ellipse cy="10" rx="6.5" ry="4" fill="#3F6B50"></ellipse>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z"></path>
+                  <path fill="#F6F1E6" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(72)"></path>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(144)"></path>
+                  <path fill="#F4EEE4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(216)"></path>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(288)"></path>
+                  <circle r="6.5" fill="#5B8A6A"></circle>
+                  <circle cy="-0.6" r="2.6" fill="#F0D48A"></circle>
+                </g>
+                <g class="flower" transform="translate(346 184) scale(0.78)">
+                  <ellipse cy="10" rx="6.5" ry="4" fill="#3F6B50"></ellipse>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z"></path>
+                  <path fill="#F6F1E6" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(72)"></path>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(144)"></path>
+                  <path fill="#F4EEE4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(216)"></path>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(288)"></path>
+                  <circle r="6.5" fill="#5B8A6A"></circle>
+                  <circle cy="-0.6" r="2.6" fill="#F0D48A"></circle>
+                </g>
+                <g class="flower" transform="translate(258 204) scale(0.62)">
+                  <ellipse cy="10" rx="6.5" ry="4" fill="#3F6B50"></ellipse>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z"></path>
+                  <path fill="#F6F1E6" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(72)"></path>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(144)"></path>
+                  <path fill="#F4EEE4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(216)"></path>
+                  <path fill="#FFFAF4" d="M0 3C7-6 8-18 0-28C-8-18-7-6 0 3Z" transform="rotate(288)"></path>
+                  <circle r="6.5" fill="#5B8A6A"></circle>
+                  <circle cy="-0.6" r="2.6" fill="#F0D48A"></circle>
+                </g>
+              </g>
+            </g>
+          </g>
+
+          <g class="fallen-petals">
+            <ellipse cx="268" cy="366" rx="8" ry="3.8" fill="#FFFAF4" transform="rotate(-24 268 366)"></ellipse>
+            <ellipse cx="362" cy="370" rx="7" ry="3.4" fill="#F3E6D4" transform="rotate(18 362 370)"></ellipse>
+          </g>
+
+          <g transform="translate(108 348) scale(1.22)">
+            <g class="critter critter-snail">
+              <g class="critter-motion">
+                <ellipse cx="6" cy="12" rx="16" ry="3.2" fill="#243027" opacity="0.1"></ellipse>
+                <path d="M-4 8C6 8 14 7 26 5" fill="none" stroke="#7D9E86" stroke-width="5" stroke-linecap="round"></path>
+                <path d="M20 4C23 -2 24 -8 21 -10" fill="none" stroke="#7D9E86" stroke-width="1.7" stroke-linecap="round"></path>
+                <circle cx="21" cy="-11" r="1.15" fill="#243027"></circle>
+                <path d="M14 5C16 -1 17 -5 15 -7" fill="none" stroke="#7D9E86" stroke-width="1.45" stroke-linecap="round"></path>
+                <circle cx="15" cy="-8" r="1" fill="#243027"></circle>
+                <circle cx="2" cy="1" r="12" fill="#5B8A6A"></circle>
+                <circle cx="2" cy="1" r="7" fill="none" stroke="#E7F3EB" stroke-width="1.7"></circle>
+                <circle cx="0" cy="2" r="2.6" fill="none" stroke="#E7F3EB" stroke-width="1.25"></circle>
+              </g>
+            </g>
+          </g>
+
+          <g transform="translate(198 354) scale(1.18)">
+            <g class="critter critter-beetle">
+              <g class="critter-motion">
+                <ellipse cx="0" cy="11" rx="12" ry="3" fill="#243027" opacity="0.1"></ellipse>
+                <ellipse cx="0" cy="2" rx="13" ry="8.5" fill="#5B8A6A"></ellipse>
+                <ellipse cx="-1" cy="1" rx="9" ry="6" fill="#3F6B50"></ellipse>
+                <path d="M0 -5V9" stroke="#2F5A40" stroke-width="1.1" opacity="0.55"></path>
+                <circle cx="4" cy="-1" r="1.5" fill="#F4F7F2" opacity="0.85"></circle>
+                <circle cx="-5" cy="0" r="1.25" fill="#F4F7F2" opacity="0.75"></circle>
+                <circle cx="11" cy="0" r="4.6" fill="#243027"></circle>
+                <circle cx="12.3" cy="-0.8" r="1" fill="#FFFFFF"></circle>
+                <path d="M-7 8L-12 14M-1 9L-2 15M7 8L11 14" fill="none" stroke="#243027" stroke-width="1.35" stroke-linecap="round"></path>
+              </g>
+            </g>
+          </g>
+
+          <g transform="translate(168 150)">
+            <g class="critter critter-butterfly">
+              <g class="critter-motion">
+                <g class="wing wing-left">
+                  <ellipse cx="-16" cy="-8" rx="18" ry="12" fill="#8FB39A"></ellipse>
+                  <ellipse cx="-13" cy="8" rx="13" ry="10" fill="#5B8A6A"></ellipse>
+                  <ellipse cx="-16" cy="-8" rx="7" ry="5" fill="#F7F3EA" opacity="0.75"></ellipse>
+                </g>
+                <g class="wing wing-right">
+                  <ellipse cx="16" cy="-8" rx="18" ry="12" fill="#8FB39A"></ellipse>
+                  <ellipse cx="13" cy="8" rx="13" ry="10" fill="#5B8A6A"></ellipse>
+                  <ellipse cx="16" cy="-8" rx="7" ry="5" fill="#F7F3EA" opacity="0.75"></ellipse>
+                </g>
+                <rect x="-1.4" y="-14" width="2.8" height="26" rx="1.4" fill="#243027"></rect>
+                <circle cy="-15" r="2.2" fill="#243027"></circle>
+                <path d="M-1 -16C-5 -23 -9 -23 -9 -18" fill="none" stroke="#243027" stroke-width="1.1" stroke-linecap="round"></path>
+                <path d="M1 -16C5 -23 9 -23 9 -18" fill="none" stroke="#243027" stroke-width="1.1" stroke-linecap="round"></path>
+              </g>
+            </g>
+          </g>
+
+          <g class="critter critter-firefly">
+            <g transform="translate(236 124)">
+              <g class="firefly">
+                <circle class="firefly-glow" r="14" fill="#FFF4C8"></circle>
+                <circle r="2.5" fill="#FFFAF0"></circle>
+              </g>
+            </g>
+            <g transform="translate(404 168)">
+              <g class="firefly">
+                <circle class="firefly-glow" r="12" fill="#FFF4C8"></circle>
+                <circle r="2.2" fill="#FFFAF0"></circle>
+              </g>
+            </g>
+            <g transform="translate(360 96)">
+              <g class="firefly">
+                <circle class="firefly-glow" r="10" fill="#FFF4C8"></circle>
+                <circle r="2" fill="#FFFAF0"></circle>
+              </g>
+            </g>
+          </g>
         </svg>
       </section>
 

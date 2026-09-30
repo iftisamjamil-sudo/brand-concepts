@@ -1,6 +1,7 @@
 /* Focus Garden timer.
    Progress (0–1) is published as --focus-progress and window.FocusGarden.setProgress.
-   Completion dispatches a bubbling "focus-complete" CustomEvent on document. */
+   Completion dispatches a bubbling "focus-complete" CustomEvent on document.
+   The scene helper maps that progress onto plant stage, visiting critters, and the sun. */
 (function () {
   const PHASE_COPY = {
     idle: "Ready",
@@ -38,6 +39,84 @@
     };
   }
 
+  const STAGE_CAPTION = {
+    seed: "A seed rests in the soil.",
+    sprout: "A sprout breaks the soil.",
+    leaves: "Leaves open on a small stem.",
+    tall: "The plant grows taller.",
+    bloom: "The plant is in full bloom.",
+  };
+
+  const CRITTER_CAPTION = {
+    beetle: "A beetle visits.",
+    snail: "A snail crosses the soil.",
+    butterfly: "A butterfly arrives.",
+    bird: "A bird settles nearby.",
+    firefly: "Fireflies glow.",
+  };
+
+  function stageFor(value) {
+    if (value < 0.15) return "seed";
+    if (value < 0.35) return "sprout";
+    if (value < 0.55) return "leaves";
+    if (value < 0.75) return "tall";
+    return "bloom";
+  }
+
+  function crittersFor(value) {
+    const critters = [];
+    if (value >= 0.2) critters.push("beetle");
+    if (value >= 0.4) critters.push("snail");
+    if (value >= 0.6) critters.push("butterfly");
+    if (value >= 0.8) critters.push("bird");
+    if (value >= 0.96) critters.push("firefly");
+    return critters;
+  }
+
+  function sceneCaption(stage, critters) {
+    const line = STAGE_CAPTION[stage] || STAGE_CAPTION.seed;
+    if (!critters.length) return line;
+    const newest = CRITTER_CAPTION[critters[critters.length - 1]];
+    return newest ? `${line} ${newest}` : line;
+  }
+
+  function placeSun(value) {
+    if (!els.sun) return;
+    const lift = Math.sin(value * Math.PI);
+    const x = 108 + value * 424;
+    const y = 172 - lift * 104;
+    const scale = 1.12 - lift * 0.2;
+    els.sun.setAttribute(
+      "transform",
+      `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${scale.toFixed(3)})`
+    );
+  }
+
+  function syncScene(value) {
+    placeSun(value);
+    if (!els.scene) return;
+    const stage = stageFor(value);
+    const critters = crittersFor(value);
+    const critterKey = critters.join(" ");
+    if (els.scene.dataset.stage !== stage) els.scene.dataset.stage = stage;
+    if ((els.scene.dataset.critters || "") !== critterKey) {
+      els.scene.dataset.critters = critterKey;
+    }
+    els.scene.classList.toggle("is-complete", value >= 1);
+    if (!els.sceneStatus) return;
+    const caption = sceneCaption(stage, critters);
+    if (els.sceneStatus.textContent !== caption) {
+      els.sceneStatus.textContent = caption;
+    }
+  }
+
+  function celebrateScene() {
+    if (!els.scene || progress < 1) return;
+    els.scene.classList.remove("is-complete");
+    void els.scene.offsetWidth;
+    els.scene.classList.add("is-complete");
+  }
+
   function setProgress(p) {
     const value = Number(p);
     const next = Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
@@ -52,6 +131,7 @@
     if (els.track) {
       els.track.setAttribute("aria-valuenow", String(Math.round(next * 100)));
     }
+    syncScene(next);
   }
 
   function renderClock() {
@@ -161,6 +241,8 @@
   function init() {
     els.app = document.getElementById("app");
     els.scene = document.getElementById("scene");
+    els.sceneStatus = document.getElementById("scene-status");
+    els.sun = document.querySelector("#scene .sun");
     els.time = document.getElementById("time");
     els.track = document.getElementById("track");
     els.durations = document.getElementById("durations");
@@ -193,6 +275,8 @@
       if (!target || target.name !== "minutes") return;
       applyMinutes(Number(target.value));
     });
+
+    document.addEventListener("focus-complete", celebrateScene);
 
     document.addEventListener("visibilitychange", () => {
       if (phase !== "running") return;
